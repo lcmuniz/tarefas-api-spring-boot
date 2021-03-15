@@ -35,6 +35,7 @@ public class AutorController {
     Autor update(@PathVariable Long id, @RequestBody Autor autor) {
         return repo.findById(id).map(a -> {
             if (autor.getNome() != null) a.setNome(autor.getNome());
+            repo.save(a);
             return a;
         }).orElseThrow(() -> new AutorNaoEncontradoException(id));
     }
